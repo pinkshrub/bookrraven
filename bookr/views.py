@@ -1,24 +1,26 @@
 from django.shortcuts import render
 from django.views.generic import View
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import bbrRegForm
 
 # Create your views here.
 class Main(View):
-	logform = AuthenticationForm
-	regform = UserCreationForm
+	
 	def get(self, request):
+		logform = AuthenticationForm
+		regform = bbrRegForm
 		context = {
-			'logform': self.logform,
-			'regform': self.regfom,
+			'logform': logform,
+			'regform': regform,
 		}
 		return render(request, 'bookrraven/landing.html', context)
 
 class Login(View):
-	logform = AuthenticationForm(request.POST)
-	regform = UserCreationForm
+	regform = bbrRegForm
 	def post(self, request):
+		logform = AuthenticationForm(request.POST)
 		context = {
-			'logform': self.logform,
+			'logform': logform,
 			'regform': self.regform,
 		}
 		if self.logform.is_valid():
@@ -39,14 +41,14 @@ class Login(View):
 
 class Register(View):
 	logform = AuthenticationForm
-	regform = UserCreationForm(request.POST)
 	def post(self, request):
 		# for errors
+		regform = bbrRegForm(request.POST)
 		context = {
 			'logform': self.logform,
-			'regform': self.regform,
+			'regform': regform,
 		}
-		if self.regform.is_valid():
+		if regform.is_valid():
 			regform.save()
 			# log 'em in
 			user = authenticate(username=regform.cleaned_data['username'], password=regform.cleaned_data['password1'],)
@@ -60,7 +62,7 @@ class Dashboard(View):
 	def get(self, request):
 		# if our newly logged in user is an artist or booker go to diff sites
 		if (artist):
-			artistInfo = 
+			artistInfo = 'placeholder'
 			context = {
 				'artistInfo': artistInfo,
 			}
@@ -83,8 +85,8 @@ class Dashboard(View):
 			pass
 class Venue(View):
 	def get(self,request):
-		venueInfo = 
-		eventList = 
+		venueInfo = 'placeholder'
+		eventList = 'placeholder'
 		context = {
 			'eventList': eventList,
 			'venueInfo': venueInfo,

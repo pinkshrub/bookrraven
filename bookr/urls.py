@@ -1,10 +1,10 @@
-from django.conf.urls import url, pattern
+from django.conf.urls import url, patterns
 from django.shortcuts import redirect
-from . import 
+from . import views
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-	url(r'^$', redirect('bookrraven')),
+	url(r'^$', views.Main.as_view()),
 	url(r'^bookrraven/$', views.Main.as_view(), name='brr-landing'),
 	url(r'^login/$', views.Login.as_view(), name='brr-login'),
 	url(r'^register/$', views.Register.as_view(), name='brr-register'),

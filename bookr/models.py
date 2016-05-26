@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 class People(models.Model):
 	BOOKER = 'BKR'
@@ -10,12 +11,13 @@ class People(models.Model):
 		(BOOKER, 'Booker'),
 		(ARTIST, 'Artist')
 		)
-	first_name = models.CharField(max_length=45)
-	last_name = models.CharField(max_length=45)
-	email = models.CharField(max_length=100)
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	# first_name = models.CharField(max_length=45)
+	# last_name = models.CharField(max_length=45)
+	# email = models.CharField(max_length=100)
 	user_phone = models.CharField(max_length=10)
 	access = models.CharField(max_length=3, choices=ACCESS_CHOICES)
-	hashpass = models.CharField(max_length=255)
+	# hashpass = models.CharField(max_length=255)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
