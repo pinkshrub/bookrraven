@@ -112,3 +112,7 @@ class Artist(View):
 		# get artists info for profile page
 		pass
 
+class Logout(View):
+	def get(self, request):
+		logout(request, next='/bookrraven/')
+

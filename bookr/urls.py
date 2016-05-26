@@ -11,4 +11,5 @@ urlpatterns = [
 	url(r'^dashboard/$', login_required(views.Dashboard.as_view()), name='brr-dashboard'),
 	url(r'^venue/(?P<venue_id>\d+)', views.Venue.as_view(), name='brr-venue'),
 	url(r'^artist/(?P<user_id>\d+)', views.Artist.as_view(), name='bbr-artist'),
+	url(r'^logout/', views.Logout.as_view(), name='bbr-logout'),
 ]
